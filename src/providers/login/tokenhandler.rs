@@ -11,9 +11,9 @@ struct Data {
 
 pub (crate) async fn start_webserver() -> String {
     let token = webserver::start().await;
-    //let username = api::get_username_api(&token).await.expect("Failed to fetch GitHub user");
+    let username = api::get_username_api(&token).await.expect("Failed to fetch GitHub user");
 
-    //println!("{:?}", username);
+    println!("{:?}", username);
 
     let data = Data {
         token: token.clone()
