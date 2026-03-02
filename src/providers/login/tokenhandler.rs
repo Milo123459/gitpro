@@ -6,16 +6,17 @@ use crate::providers::login::api;
 
 #[derive(Serialize, Deserialize)]
 struct Data {
-    token: String,
+    token: String
 }
 
-pub async fn start_webserver() -> String {
+pub (crate) async fn start_webserver() -> String {
     let token = webserver::start().await;
-    let username = api::get_username_api(&token);
+    //let username = api::get_username_api(&token).await.expect("Failed to fetch GitHub user");
 
+    //println!("{:?}", username);
 
     let data = Data {
-        token: token.clone(),
+        token: token.clone()
     };
 
     let json = serde_json::to_string_pretty(&data).unwrap();

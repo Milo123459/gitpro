@@ -10,8 +10,7 @@ struct Email {
     visibility: Option<String>,
 }
 
-#[tokio::main]
-pub(crate) async fn get_username_api(token: &str) -> Result<(), Box<dyn std::error::Error>> {
+pub(crate) async fn get_username_api(token: &str) -> Result<String, Box<dyn std::error::Error>> {
     let octocrab = Octocrab::builder()
         .personal_token(token.to_string())
         .build()?;
@@ -35,5 +34,5 @@ pub(crate) async fn get_username_api(token: &str) -> Result<(), Box<dyn std::err
         );
     }
 
-    Ok(())
+    Ok(user.login)
 }

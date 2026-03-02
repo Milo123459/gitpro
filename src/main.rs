@@ -2,6 +2,7 @@
 //https://github.com/login/oauth/authorize?client_id=Ov23liICKYW0zOWqK6xS&redirect_uri=http://127.0.0.1:49152/callback&scope=repo
 
 use dioxus::prelude::*;
+use rustls::crypto::{CryptoProvider, ring};
 
 mod components;
 mod views;
@@ -14,6 +15,8 @@ const MAIN_CSS: Asset = asset!("/assets/main.css");
 const JETBRAINS_MONO: Asset = asset!("/assets/fonts/JetBrainsMono-Medium.ttf");
 
 fn main() {
+    CryptoProvider::install_default(ring::default_provider())
+        .expect("Failed to install rustls crypto provider");
     dioxus::launch(App);
 }
 
